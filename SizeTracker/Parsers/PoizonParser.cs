@@ -2,35 +2,11 @@
 
 namespace SizeTracker.Parsers
 {
-    internal class PoizonParser : ISiteParser
+    internal class PoizonParser : SiteParserBase
     {
         public static string SiteName { get; } = "poizon";
 
-        public bool IsSizeAvailable(string clothingUrl, string userInputSize)
-        { 
-            try
-            {
-                var sizes = GetShoeSizes(clothingUrl);
-
-                Console.WriteLine($"Доступные размеры:");
-                sizes.ToList().ForEach(Console.WriteLine);
-
-                foreach (var currentSize in sizes)
-                {
-                    if (currentSize == userInputSize)
-                    {
-                        return true;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Произошла ошибка: {ex.Message}");
-            }
-            return false;
-        }
-
-        static string[] GetShoeSizes(string url)
+        public override string[] GetAvailableSizes(string url)
         {
             using (HttpClient client = new HttpClient())
             {

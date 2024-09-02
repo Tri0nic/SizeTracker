@@ -22,7 +22,6 @@ namespace SizeTracker
             Console.WriteLine("Введите нужный размер:");
             string size = Console.ReadLine(); //TODO: сделать проверку на корректность
 
-             
             Console.WriteLine("Введите способ отправки уведомления: 1 - Email, 2 - Telegram, 3 - Оба");
             string choosedSendersNumber = Console.ReadLine(); //TODO: сделать проверку на корректность
 
