@@ -10,18 +10,18 @@ namespace SizeTracker.Parsers
         {
             using (HttpClient client = new HttpClient())
             {
-                HttpResponseMessage response = client.GetAsync(url).Result;
+                var response = client.GetAsync(url).Result;
                 response.EnsureSuccessStatusCode();
-                string pageContents = response.Content.ReadAsStringAsync().Result;
+                var pageContents = response.Content.ReadAsStringAsync().Result;
 
-                HtmlDocument doc = new HtmlDocument();
+                var doc = new HtmlDocument();
                 doc.LoadHtml(pageContents);
 
                 var sizeNodes = doc.DocumentNode.SelectNodes(".//div[@class='SkuPanel_value__BAJ1p']");
 
                 if (sizeNodes != null)
                 {
-                    string[] sizes = new string[sizeNodes.Count];
+                    var sizes = new string[sizeNodes.Count];
                     for (int i = 0; i < sizeNodes.Count; i++)
                     {
                         sizes[i] = sizeNodes[i].InnerText.Trim();

@@ -3,7 +3,7 @@ using SizeTracker.Parsers.FactoryParser;
 
 namespace SizeTracker
 {
-    public class ApplicationRunner// : IClothing
+    public class ApplicationRunner
     {
         private readonly ISiteParserFactory _siteParserFactory;
         private readonly NotificationSenderFactory _notificationSenderFactory;
@@ -17,19 +17,19 @@ namespace SizeTracker
         public void Run()
         {
             Console.WriteLine("Введите ссылку на одежду:");
-            string clothingUrl = Console.ReadLine(); //TODO: сделать проверку на корректность
+            var clothingUrl = Console.ReadLine(); //TODO: сделать проверку на корректность
 
             Console.WriteLine("Введите нужный размер:");
-            string size = Console.ReadLine(); //TODO: сделать проверку на корректность
+            var size = Console.ReadLine(); //TODO: сделать проверку на корректность
 
             Console.WriteLine("Введите способ отправки уведомления: 1 - Email, 2 - Telegram, 3 - Оба");
-            string choosedSendersNumber = Console.ReadLine(); //TODO: сделать проверку на корректность
+            var choosedSendersNumber = Console.ReadLine(); //TODO: сделать проверку на корректность
 
             var parser = _siteParserFactory.ChooseParser(clothingUrl);
 
-            var notificationSender = _notificationSenderFactory.CreateNotificationSender(choosedSendersNumber); 
+            var notificationSender = _notificationSenderFactory.CreateNotificationSender(choosedSendersNumber);
 
-            bool isSizeAvailable = false;
+            var isSizeAvailable = false;
 
             while (!isSizeAvailable)
             {
@@ -37,13 +37,13 @@ namespace SizeTracker
 
                 if (isSizeAvailable)
                 {
-                    string message = $"Размер {size} доступен на сайте по ссылке {clothingUrl}.";
+                    var message = $"Размер {size} доступен на сайте по ссылке {clothingUrl}.";
                     notificationSender.SendNotification(message);
                 }
                 else
                 {
                     Console.WriteLine($"Размер {size} недоступен на сайте. Продолжаем проверку...");
-                    System.Threading.Thread.Sleep(30000);
+                    Thread.Sleep(30000);
                 }
             }
         }

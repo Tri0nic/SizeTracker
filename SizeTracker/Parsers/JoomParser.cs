@@ -23,7 +23,7 @@ namespace SizeTracker.Parsers
 
                 var accessToken = GetToken(client, tokenUrl);
 
-                return GetProductDetails(client, productApiUrl, productId, accessToken);
+                return GetAvailableSizesFromAccessToken(client, productApiUrl, productId, accessToken);
             }
         }
 
@@ -40,7 +40,7 @@ namespace SizeTracker.Parsers
             return jsonResponse["payload"]["accessToken"].ToString();
         }
 
-        static string[] GetProductDetails(HttpClient client, string productApiUrl, string productId, string accessToken)
+        static string[] GetAvailableSizesFromAccessToken(HttpClient client, string productApiUrl, string productId, string accessToken)
         {
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
