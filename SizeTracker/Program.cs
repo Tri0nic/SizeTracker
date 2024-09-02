@@ -1,14 +1,6 @@
-﻿using HtmlAgilityPack;
-using Microsoft.Extensions.DependencyInjection;
-using SizeTracker;
-using SizeTracker.Interfaces;
-using SizeTracker.Notification;
+﻿using SizeTracker;
 using SizeTracker.Notifications.FactoryNotifications;
-using SizeTracker.Parsers;
 using SizeTracker.Parsers.FactoryParser;
-using System.Net;
-using System.Net.Http.Headers;
-
 class Program
 {
     static async Task Main()

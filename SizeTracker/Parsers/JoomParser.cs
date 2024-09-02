@@ -6,8 +6,6 @@ namespace SizeTracker.Parsers
     internal class JoomParser : SiteParserBase
     {
         public static string SiteName { get; } = "joom";
-        
-        //private static string AccessToken;
 
         public override string[] GetAvailableSizes(string url)
         {
