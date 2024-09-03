@@ -8,31 +8,28 @@ namespace SizeTracker.Notification
     {
         public void SendNotification(string message)
         {
-            // Настройки SMTP-сервера Mail.ru
-            string smtpServer = "smtp.mail.ru"; //smpt сервер(зависит от почты отправителя)
-            int smtpPort = 587; // Обычно используется порт 587 для TLS
-            string smtpUsername = ""; //твоя почта, с которой отправляется сообщение
-            string smtpPassword = "";//пароль приложения (от почты)
+            string smtpServer = "smtp.mail.ru";
+            int smtpPort = 587;
+            string smtpUsername = "";
+            string smtpPassword = "";
 
-            // Создаем объект клиента SMTP
             using (SmtpClient smtpClient = new SmtpClient(smtpServer, smtpPort))
             {
-                // Настройки аутентификации
                 smtpClient.Credentials = new NetworkCredential(smtpUsername, smtpPassword);
                 smtpClient.EnableSsl = true;
 
                 using (MailMessage mailMessage = new MailMessage())
                 {
                     mailMessage.From = new MailAddress(smtpUsername);
-                    mailMessage.To.Add(""); // Укажите адрес получателя
-                    mailMessage.Subject = "Заголовок сообщения (тема)";
-                    mailMessage.Body = $"Текст сообщения";
+                    mailMessage.To.Add("");
+                    mailMessage.Subject = "Нужный размер товара доступен на сайте";
+                    mailMessage.Body = message;
 
                     try
                     {
-                        // Отправляем сообщение
                         smtpClient.Send(mailMessage);
-                        Console.WriteLine("Сообщение успешно отправлено.");
+                        Console.WriteLine(message);
+                        Console.WriteLine("Уведомление отправлено на email");
                     }
                     catch (Exception ex)
                     {
@@ -40,10 +37,6 @@ namespace SizeTracker.Notification
                     }
                 }
             }
-
-            // Логика отправки email-сообщения
-            Console.WriteLine(message);
-            Console.WriteLine("Уведомление отправлено на email");
         }
     }
 }
